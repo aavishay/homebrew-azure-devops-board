@@ -1,6 +1,6 @@
 cask "azure-devops-board" do
   version "1.0.0"
-  sha256 :no_check # replaced with the real checksum by the release workflow
+  sha256 "1bce0698d675d031860a3084b86304cb5a0619c1dbf61363a933b5a5cbf0121f"
 
   url "https://github.com/aavishay/azure-devops-board/releases/download/v#{version}/azure-devops-board-#{version}-macos-universal.dmg"
   name "Azure DevOps Board"
@@ -11,8 +11,6 @@ cask "azure-devops-board" do
     url :url
     strategy :github_latest
   end
-
-  depends_on macos: ">= :catalina"
 
   app "Azure DevOps Board.app"
 
