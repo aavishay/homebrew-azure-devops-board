@@ -1,8 +1,8 @@
-cask "azdevops" do
+cask "azure-devops-board" do
   version "1.0.0"
   sha256 :no_check # replaced with the real checksum by the release workflow
 
-  url "https://github.com/aavishay/azure-devops-board/releases/download/v#{version}/azdevops-#{version}-macos-universal.dmg"
+  url "https://github.com/aavishay/azure-devops-board/releases/download/v#{version}/azure-devops-board-#{version}-macos-universal.dmg"
   name "Azure DevOps Board"
   desc "Azure DevOps team kanban board"
   homepage "https://github.com/aavishay/azure-devops-board"
