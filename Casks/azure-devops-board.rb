@@ -12,13 +12,16 @@ cask "azure-devops-board" do
     strategy :github_latest
   end
 
+  depends_on :macos
+
   app "Azure DevOps Board.app"
 
   # The app is not notarized; clear the quarantine flag so it opens without the Gatekeeper prompt.
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/Azure DevOps Board.app"],
-                   sudo: false
+  postflight_steps do
+    run "/usr/bin/xattr",
+        args:           ["-dr", "com.apple.quarantine", "{{appdir}}/Azure DevOps Board.app"],
+        writable_paths: ["Azure DevOps Board.app"],
+        writable_base:  :appdir
   end
 
   zap trash: [
