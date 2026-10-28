@@ -1,6 +1,6 @@
 cask "azure-devops-board" do
-  version "1.1.1"
-  sha256 "dcaa68301863fa44b03b0b27640325006620e526f3eac691cae7ba4e0d268f89"
+  version "1.1.0"
+  sha256 "582de0ac14aa14639b439fdbcb4a384978db7963a05869e06789a81993c368db"
 
   url "https://github.com/aavishay/azure-devops-board/releases/download/v#{version}/azure-devops-board-#{version}-macos-universal.dmg"
   name "Azure DevOps Board"
