@@ -1,0 +1,41 @@
+# Checks the cask the way a user's Homebrew would load it: style, audit, and a
+# download that verifies the sha256 against the published release.
+name: check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cask:
+    runs-on: macos-latest
+    env:
+      CASK: aavishay/azure-devops-board/azure-devops-board
+      HOMEBREW_NO_AUTO_UPDATE: "1"
+    steps:
+      - uses: actions/checkout@v7
+
+      # Load this checkout as the tap, so the PR's version of the cask is what gets checked.
+      # Homebrew 7 refuses casks from untrusted third-party taps, so trust it first.
+      - name: Use this checkout as the tap
+        run: |
+          TAP="$(brew --repository)/Library/Taps/aavishay/homebrew-azure-devops-board"
+          rm -rf "$TAP"
+          mkdir -p "$(dirname "$TAP")"
+          ln -s "$GITHUB_WORKSPACE" "$TAP"
+          brew trust --tap aavishay/azure-devops-board
+
+      - name: Style
+        run: brew style --cask "$CASK"
+
+      - name: Audit
+        run: brew audit --cask --online "$CASK"
+
+      # Fails if the release asset is missing or its sha256 doesn't match the cask.
+      - name: Download and verify the checksum
+        run: brew fetch --cask --force "$CASK"
