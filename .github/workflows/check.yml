@@ -1,5 +1,6 @@
-# Checks the cask the way a user's Homebrew would load it: style, audit, and a
-# download that verifies the sha256 against the published release.
+# Checks the formula the way a user's Homebrew would load it: style, audit, a
+# download that verifies the sha256 against the published release, then an
+# install that runs the formula's test.
 name: check
 
 on:
@@ -12,16 +13,16 @@ permissions:
   contents: read
 
 jobs:
-  cask:
+  formula:
     runs-on: macos-latest
     env:
-      CASK: aavishay/azure-devops-board/azure-devops-board
+      FORMULA: aavishay/azure-devops-board/azure-devops-board
       HOMEBREW_NO_AUTO_UPDATE: "1"
     steps:
       - uses: actions/checkout@v7
 
-      # Load this checkout as the tap, so the PR's version of the cask is what gets checked.
-      # Homebrew 7 refuses casks from untrusted third-party taps, so trust it first.
+      # Load this checkout as the tap, so the PR's version of the formula is what gets checked.
+      # Homebrew 7 refuses formulae from untrusted third-party taps, so trust it first.
       - name: Use this checkout as the tap
         run: |
           TAP="$(brew --repository)/Library/Taps/aavishay/homebrew-azure-devops-board"
@@ -31,11 +32,16 @@ jobs:
           brew trust --tap aavishay/azure-devops-board
 
       - name: Style
-        run: brew style --cask "$CASK"
+        run: brew style --formula "$FORMULA"
 
       - name: Audit
-        run: brew audit --cask --online "$CASK"
+        run: brew audit --formula --online "$FORMULA"
 
-      # Fails if the release asset is missing or its sha256 doesn't match the cask.
+      # Fails if the release asset is missing or its sha256 doesn't match the formula.
       - name: Download and verify the checksum
-        run: brew fetch --cask --force "$CASK"
+        run: brew fetch --formula --force "$FORMULA"
+
+      - name: Install and test
+        run: |
+          brew install --formula "$FORMULA"
+          brew test "$FORMULA"
