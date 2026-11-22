@@ -5,19 +5,19 @@ class AzureDevopsBoard < Formula
   # One universal binary serves both Mac architectures.
   on_macos do
     on_arm do
-      url "https://github.com/aavishay/azure-devops-board/releases/download/v2.3.10/azure-devops-board-2.3.10-macos-universal.tar.gz"
-      sha256 "5a90273761ff9f7135a78f11b96c136d5e165f4065aaaf97bd08f2693ba3e71e"
+      url "https://github.com/aavishay/azure-devops-board/releases/download/v2.3.11/azure-devops-board-2.3.11-macos-universal.tar.gz"
+      sha256 "74c5770a927309aaeb8117c4caed88edc8a65fa32e90471c961163ab29f51759"
     end
     on_intel do
-      url "https://github.com/aavishay/azure-devops-board/releases/download/v2.3.10/azure-devops-board-2.3.10-macos-universal.tar.gz"
-      sha256 "5a90273761ff9f7135a78f11b96c136d5e165f4065aaaf97bd08f2693ba3e71e"
+      url "https://github.com/aavishay/azure-devops-board/releases/download/v2.3.11/azure-devops-board-2.3.11-macos-universal.tar.gz"
+      sha256 "74c5770a927309aaeb8117c4caed88edc8a65fa32e90471c961163ab29f51759"
     end
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/aavishay/azure-devops-board/releases/download/v2.3.10/azure-devops-board-2.3.10-linux-x86_64.tar.gz"
-      sha256 "12d5a9c985554269257b48fd04e31fb58baf0b7e2e188f519f10b4d6e8678aa4"
+      url "https://github.com/aavishay/azure-devops-board/releases/download/v2.3.11/azure-devops-board-2.3.11-linux-x86_64.tar.gz"
+      sha256 "bda1e5126a2587bf82f6a91800f06d3018f24b2619903c3136307999bc6c9c6a"
     end
   end
 
